@@ -1,0 +1,64 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:AvaloniaTemplate.Fluent"
+             xmlns:models="using:AvaloniaTemplate.Models"
+             xmlns:vm="using:AvaloniaTemplate.Fluent.ViewModels"
+             xmlns:converters="clr-namespace:AvaloniaTemplate.Fluent.Converters"
+             x:DataType="vm:ApplicationViewModel"
+             x:CompileBindings="True"
+             x:Class="AvaloniaTemplate.Fluent.App">
+  <Application.DataTemplates>
+    <local:ViewLocator />
+    <DataTemplate DataType="models:ErrorDescriptor" x:DataType="models:ErrorDescriptor">
+      <TextBlock x:CompileBindings="True" Text="{Binding Message}" Foreground="{DynamicResource SystemControlErrorTextForegroundBrush}" TextWrapping="Wrap" />
+    </DataTemplate>
+  </Application.DataTemplates>
+
+  <Application.Resources>
+    <x:Double x:Key="ToggleSwitchThemeMinWidth">0</x:Double>
+    <converters:BoolStringConverter x:Key="ShowHideBoolConverter" True="Hide" False="Show" />
+  </Application.Resources>
+
+  <Application.Styles>
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Styles/Themes/BaseDark.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Icons/Icons.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Styles/Styles.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/ContentArea.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/InfoMessage.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/Dialog.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/ProgressRingArc.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/ProgressRing.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/TagControl.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/TagsBox.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/NavBarItem.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/TileButton.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/QuestionControl.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/PreviewItem.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/PrivacyBar.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/AdorningContentControl.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/TileControl.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/PrivacyContentControl.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/LabelsItemsPresenter.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/SuggestionItem.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/ClipboardCopyButton.axaml" />
+    <StyleInclude Source="avares://AvaloniaTemplate.Fluent/Controls/CopyableItem.axaml" />
+  </Application.Styles>
+  <NativeMenu.Menu>
+    <NativeMenu>
+      <NativeMenuItem Header="About Avalonia Template" Command="{Binding AboutCommand}" />
+    </NativeMenu>
+  </NativeMenu.Menu>
+  <TrayIcon.Icons>
+    <TrayIcons>
+      <TrayIcon Icon="{Binding TrayIcon}" Command="{Binding ShowCommand}" ToolTipText="Avalonia Template">
+        <NativeMenu.Menu>
+          <NativeMenu>
+            <NativeMenuItem Header="{Binding IsMainWindowShown, Converter={StaticResource ShowHideBoolConverter}}" Command="{Binding ShowHideCommand}" />
+            <NativeMenuItemSeparator />
+            <NativeMenuItem Header="Quit" Command="{Binding QuitCommand}" />
+          </NativeMenu>
+        </NativeMenu.Menu>
+      </TrayIcon>
+    </TrayIcons>
+  </TrayIcon.Icons>
+</Application>

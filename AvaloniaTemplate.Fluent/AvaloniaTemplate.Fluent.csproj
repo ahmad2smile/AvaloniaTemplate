@@ -1,0 +1,70 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
+		<AnalysisLevel>latest</AnalysisLevel>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<NoWarn>1701;1702;1705;1591;1573;CA1031</NoWarn>
+		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+		<CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\$(Configuration)\$(TargetFramework)\GeneratedFiles</CompilerGeneratedFilesOutputPath>
+		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+		<DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+		<InvariantGlobalization>true</InvariantGlobalization>
+		<RuntimeIdentifiers>win7-x64;linux-x64;linux-arm64;osx-x64;osx-arm64</RuntimeIdentifiers>
+		<PathMap>$(MSBuildProjectDirectory)\=AvaloniaTemplate.Fluent</PathMap>
+		<AvaloniaVersion>0.10.18</AvaloniaVersion>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+	<ItemGroup>
+		<AvaloniaResource Include="Assets\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.Controls.TreeDataGrid" Version="0.10.18" />
+		<PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" Condition="'$(Configuration)' == 'Debug'" />
+		<PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.10.18" />
+		<PackageReference Include="Avalonia.Skia" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+		<PackageReference Include="System.Runtime" Version="4.3.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\AvaloniaTemplate\AvaloniaTemplate.csproj" />
+		<ProjectReference Include="..\AvaloniaTemplate.Fluent.Generators\AvaloniaTemplate.Fluent.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<RuntimeHostConfigurationOption Include="System.Globalization.Invariant" Value="true" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Views\AddWallet\AddedWalletPageView.axaml" />
+	  <UpToDateCheckInput Remove="Views\AddWallet\AddWalletPageView.axaml" />
+	  <UpToDateCheckInput Remove="Views\AddWallet\Create\ConfirmRecoveryWordsView.axaml" />
+	  <UpToDateCheckInput Remove="Views\AddWallet\Create\RecoveryWordsView.axaml" />
+	  <UpToDateCheckInput Remove="Views\AddWallet\HardwareWallet\ConnectHardwareWalletView.axaml" />
+	  <UpToDateCheckInput Remove="Views\AddWallet\HardwareWallet\DetectedHardwareWalletView.axaml" />
+	  <UpToDateCheckInput Remove="Views\AddWallet\LegalDocumentsView.axaml" />
+	  <UpToDateCheckInput Remove="Views\AddWallet\RecoverWalletView.axaml" />
+	  <UpToDateCheckInput Remove="Views\AddWallet\TermsAndConditionsView.axaml" />
+	  <UpToDateCheckInput Remove="Views\AddWallet\WalletNamePageView.axaml" />
+	  <UpToDateCheckInput Remove="Views\AddWallet\WelcomePageView.axaml" />
+	  <UpToDateCheckInput Remove="Views\Login\LoginView.axaml" />
+	  <UpToDateCheckInput Remove="Views\Login\PasswordFinder\ContainsNumbersView.axaml" />
+	  <UpToDateCheckInput Remove="Views\Login\PasswordFinder\ContainsSymbolsView.axaml" />
+	  <UpToDateCheckInput Remove="Views\Login\PasswordFinder\PasswordFinderIntroduceView.axaml" />
+	  <UpToDateCheckInput Remove="Views\Login\PasswordFinder\PasswordFoundView.axaml" />
+	  <UpToDateCheckInput Remove="Views\Login\PasswordFinder\PasswordNotFoundView.axaml" />
+	  <UpToDateCheckInput Remove="Views\Login\PasswordFinder\SearchPasswordView.axaml" />
+	  <UpToDateCheckInput Remove="Views\Login\PasswordFinder\SelectCharsetView.axaml" />
+	  <UpToDateCheckInput Remove="Views\CoinJoinProfiles\CoinJoinProfileControl.axaml" />
+	  <UpToDateCheckInput Remove="Views\CoinJoinProfiles\CoinJoinProfilesView.axaml" />
+	  <UpToDateCheckInput Remove="Views\TransactionBroadcasting\BroadcastTransactionView.axaml" />
+	  <UpToDateCheckInput Remove="Views\TransactionBroadcasting\LoadTransactionView.axaml" />
+	  <UpToDateCheckInput Remove="Views\Dialogs\Authorization\HardwareWalletAuthDialogView.axaml" />
+	  <UpToDateCheckInput Remove="Views\Dialogs\Authorization\PasswordAuthDialogView.axaml" />
+	  <UpToDateCheckInput Remove="Views\StatusIcon\StatusIcon.axaml" />
+	  <UpToDateCheckInput Remove="Views\StatusIcon\TorIssues.axaml" />
+	</ItemGroup>
+</Project>

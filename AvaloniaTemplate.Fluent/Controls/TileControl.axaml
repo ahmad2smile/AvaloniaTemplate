@@ -1,0 +1,34 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="clr-namespace:AvaloniaTemplate.Fluent.Controls">
+  <Design.PreviewWith>
+    <c:TileControl Height="140" Width="310" Title="Tile">
+      <c:TileControl.BottomContent>
+        <Button VerticalAlignment="Stretch">Bye</Button>
+      </c:TileControl.BottomContent>
+      <Button VerticalAlignment="Bottom">hello</Button>
+    </c:TileControl>
+  </Design.PreviewWith>
+
+  <Style Selector="c|TileControl">
+    <Setter Property="SeparatorMargin" Value="0 6" />
+    <Setter Property="BottomPartHeight" Value="22" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border CornerRadius="2" BorderThickness="1" Background="{DynamicResource TileRegionColor}"
+                BorderBrush="{DynamicResource TileBorderColor}"
+                Margin="0 0 10 0" Padding="12">
+          <DockPanel>
+            <TextBlock Text="{TemplateBinding Title}" DockPanel.Dock="Top" Classes="h8 bold" />
+            <StackPanel DockPanel.Dock="Bottom" Name="PART_BottomContent"
+                        IsVisible="{TemplateBinding IsBottomContentVisible}">
+              <Separator DockPanel.Dock="Bottom" Margin="{TemplateBinding SeparatorMargin}" />
+              <ContentPresenter Content="{TemplateBinding BottomContent}" />
+            </StackPanel>
+            <ContentPresenter Name="PART_Content" Content="{TemplateBinding Content}" />
+          </DockPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

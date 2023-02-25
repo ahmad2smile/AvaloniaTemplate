@@ -1,0 +1,44 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:navbar="using:AvaloniaTemplate.Fluent.Views.NavBar"
+             xmlns:spectrum="clr-namespace:AvaloniaTemplate.Fluent.Controls.Spectrum"
+             xmlns:c="using:AvaloniaTemplate.Fluent.Controls"
+             xmlns:viewModels="clr-namespace:AvaloniaTemplate.Fluent.ViewModels"
+             x:Class="AvaloniaTemplate.Fluent.Views.Shell.MainScreen"
+             x:DataType="viewModels:MainViewModel"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:shell="clr-namespace:AvaloniaTemplate.Fluent.Views.Shell"
+             d:DesignWidth="1000" d:DesignHeight="1000"
+             x:CompileBindings="True">
+
+  <DockPanel IsEnabled="{Binding IsMainContentEnabled^}">
+    <shell:TitleBar DockPanel.Dock="Top" />
+    <DockPanel>
+      <navbar:NavBar DockPanel.Dock="Left" DataContext="{Binding NavBar}" />
+      <Border x:Name="ContentPart" BorderBrush="{DynamicResource TileBorderColor}" BorderThickness="1 1 0 0"
+              CornerRadius="10 0 0 0" ClipToBounds="True">
+        <Panel>
+          <Border CornerRadius="10 0 0 0" Background="{DynamicResource RegionColor}" ClipToBounds="True"
+                  IsHitTestVisible="False" />
+          <Panel VerticalAlignment="Top" Height="100">
+            <TextBlock Background="Gray">Demo Text</TextBlock>
+          </Panel>
+          <DockPanel>
+            <DockPanel.Styles>
+              <Style Selector="ContentControl c|ContentArea /template/ Panel#PART_ButtonArea">
+                <Setter Property="IsVisible" Value="False" />
+              </Style>
+
+              <Style Selector="c|ContentArea /template/ StackPanel#PART_Header">
+                <Setter Property="Margin" Value="31 26 31 0" />
+              </Style>
+            </DockPanel.Styles>
+            <ContentControl ClipToBounds="False" Content="{Binding MainScreen.CurrentPage}" />
+          </DockPanel>
+          <Border CornerRadius="10 0 0 0" BoxShadow="inset 0 0 5 0 #000000" ClipToBounds="True"
+                  IsHitTestVisible="False" Margin="0 0 -5 -5" />
+        </Panel>
+      </Border>
+    </DockPanel>
+  </DockPanel>
+</UserControl>

@@ -1,0 +1,57 @@
+using System.Diagnostics.CodeAnalysis;
+using System.Linq.Expressions;
+using System.Reactive.Linq;
+using System.Windows.Input;
+using ReactiveUI;
+using AvaloniaTemplate.Fluent.Extensions;
+using AvaloniaTemplate.Fluent.Helpers;
+using AvaloniaTemplate.Fluent.ViewModels.Settings;
+
+namespace AvaloniaTemplate.Fluent.ViewModels.SearchBar.Settings;
+
+public partial class Setting<TTarget, TProperty> : ReactiveObject
+{
+	[AutoNotify] private TProperty? _value;
+
+	public Setting([DisallowNull] TTarget target, Expression<Func<TTarget, TProperty>> selector)
+	{
+		if (target == null)
+		{
+			throw new ArgumentNullException(nameof(target));
+		}
+
+		if (selector == null)
+		{
+			throw new ArgumentNullException(nameof(selector));
+		}
+
+		if (PropertyHelper<TTarget>.GetProperty(selector) is not { } pr)
+		{
+			throw new InvalidOperationException($"The expression {selector} is not a valid property selector");
+		}
+
+		Value = (TProperty?)pr.GetValue(target);
+
+		SetValueCommand = ReactiveCommand.Create(() => pr.SetValue(target, Value));
+
+		ShowNotificationCommand = ReactiveCommand.Create(() => NotificationHelpers.Show(new RestartViewModel("To apply the new setting, Avalonia Template needs to be restarted")));
+
+		this.WhenAnyValue(x => x.Value)
+			.ObserveOn(RxApp.MainThreadScheduler)
+			.Skip(1)
+			.ToSignal()
+			.InvokeCommand(SetValueCommand);
+
+		this.WhenAnyValue(x => x.Value)
+			.Skip(1)
+			.Throttle(TimeSpan.FromMilliseconds(SettingsTabViewModelBase.ThrottleTime + 50))
+			.ObserveOn(RxApp.MainThreadScheduler)
+			.Where(_ => SettingsTabViewModelBase.CheckIfRestartIsNeeded())
+			.ToSignal()
+			.InvokeCommand(ShowNotificationCommand);
+	}
+
+	public ICommand SetValueCommand { get; }
+
+	public ICommand ShowNotificationCommand { get; }
+}
